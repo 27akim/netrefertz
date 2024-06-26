@@ -1,3 +1,4 @@
+using BooksManagement.Api.Middlewares;
 using BooksManagement.Application.GraphQL.Mutations;
 using BooksManagement.Application.GraphQL.Queries;
 using BooksManagement.Application.Mappings;
@@ -12,10 +13,8 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Services.AddLogging();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddSwaggerGen(c =>
@@ -41,13 +40,12 @@ builder.Services.AddGraphQLServer()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();

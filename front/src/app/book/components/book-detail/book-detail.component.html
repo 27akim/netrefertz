@@ -1,0 +1,9 @@
+<div *ngIf="book$ | async as book">
+    <h2>{{ book.title }}</h2>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Published Date:</strong> {{ book.publishedDate | date }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <a [routerLink]="['/rest/books/edit', book.id]">Edit</a>
+    <button (click)="deleteBook()">Delete</button>
+  </div>
+  

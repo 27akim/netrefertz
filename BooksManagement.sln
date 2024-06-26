@@ -5,17 +5,21 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F58D36E-0363-4A5A-8111-35BDE428C919}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Core", "src\BooksManagement.Core\BooksManagement.Core.csproj", "{F01543BB-8D30-40A8-AAE4-11FF5A1236D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Core", "back\src\BooksManagement.Core\BooksManagement.Core.csproj", "{F01543BB-8D30-40A8-AAE4-11FF5A1236D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Api", "src\BooksManagement\BooksManagement.Api.csproj", "{8206C19A-AE80-4647-AAC0-9B25052D6D17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Api", "back\src\BooksManagement\BooksManagement.Api.csproj", "{8206C19A-AE80-4647-AAC0-9B25052D6D17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Application", "src\BooksManagement.Application\BooksManagement.Application.csproj", "{7822B0D3-3044-4067-9A7C-77B767C0B239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Application", "back\src\BooksManagement.Application\BooksManagement.Application.csproj", "{7822B0D3-3044-4067-9A7C-77B767C0B239}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Infrastructure", "src\BooksManagement.Infrastructure\BooksManagement.Infrastructure.csproj", "{59EEB762-E3BE-4334-9D0F-FB4E9D43B125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.Infrastructure", "back\src\BooksManagement.Infrastructure\BooksManagement.Infrastructure.csproj", "{59EEB762-E3BE-4334-9D0F-FB4E9D43B125}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C242B215-A350-4CDA-99DF-9CD11DDD67A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagement.Tests", "tests\BooksManagement.Tests\BooksManagement.Tests.csproj", "{7007D6D3-F2D2-4038-B1D6-21126F640C59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagement.UnitTests", "back\tests\BooksManagement.Tests\BooksManagement.UnitTests.csproj", "{7007D6D3-F2D2-4038-B1D6-21126F640C59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "back", "back", "{CAF70040-549C-4D11-B5B5-773CFF0787CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagement.Infrastructure.Abstractions", "back\src\BooksManagement.Abstractions\BooksManagement.Infrastructure.Abstractions.csproj", "{13E165D8-C634-44C5-AB1B-675BF40A9884}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,16 +47,23 @@ Global
 		{7007D6D3-F2D2-4038-B1D6-21126F640C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7007D6D3-F2D2-4038-B1D6-21126F640C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7007D6D3-F2D2-4038-B1D6-21126F640C59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E165D8-C634-44C5-AB1B-675BF40A9884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E165D8-C634-44C5-AB1B-675BF40A9884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E165D8-C634-44C5-AB1B-675BF40A9884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E165D8-C634-44C5-AB1B-675BF40A9884}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{7F58D36E-0363-4A5A-8111-35BDE428C919} = {CAF70040-549C-4D11-B5B5-773CFF0787CB}
 		{F01543BB-8D30-40A8-AAE4-11FF5A1236D8} = {7F58D36E-0363-4A5A-8111-35BDE428C919}
 		{8206C19A-AE80-4647-AAC0-9B25052D6D17} = {7F58D36E-0363-4A5A-8111-35BDE428C919}
 		{7822B0D3-3044-4067-9A7C-77B767C0B239} = {7F58D36E-0363-4A5A-8111-35BDE428C919}
 		{59EEB762-E3BE-4334-9D0F-FB4E9D43B125} = {7F58D36E-0363-4A5A-8111-35BDE428C919}
+		{C242B215-A350-4CDA-99DF-9CD11DDD67A9} = {CAF70040-549C-4D11-B5B5-773CFF0787CB}
 		{7007D6D3-F2D2-4038-B1D6-21126F640C59} = {C242B215-A350-4CDA-99DF-9CD11DDD67A9}
+		{13E165D8-C634-44C5-AB1B-675BF40A9884} = {7F58D36E-0363-4A5A-8111-35BDE428C919}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F449E366-9DA0-4815-A29B-54B51276F109}

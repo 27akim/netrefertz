@@ -1,4 +1,4 @@
-# BookManagement
+# BookManagement backend
 
 ## Introduction
 BookManagement is an application for managing a list of books, allowing users to add, view, edit, and delete books. 
@@ -82,3 +82,20 @@ deleteBook(id: null) {
 1. **Result objects**: The solution can be enhanced by adding results objects to store the results of the operation, for example using the library FluentResults.
 2. **Logging and Exception Handling**: The solution can be enhanced by adding more loggs and exception handling blocks.
 3. **Pagination**:  The solution can be enhanced by adding pagination when getting all books.
+
+
+# BookManagement frontend
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+
+## Running the Solution
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+### Work with REST
+
+To work with REST navigate to **/rest**
+
+### Work with GraphQL
+
+To work with GraphQL navigate to **/graphql**

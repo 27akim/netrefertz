@@ -20,7 +20,7 @@ namespace BooksManagement.UnitTests.Books.Commands
             _mockRepository = new Mock<IBookRepository>();
             _mockMapper = new Mock<IMapper>();
             _mockLogger = new Mock<ILogger<UpdateBookHandler>>();
-            _handler = new UpdateBookHandler(_mockMapper.Object, _mockRepository.Object);
+            _handler = new UpdateBookHandler(_mockMapper.Object, _mockRepository.Object, _mockLogger.Object);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace BooksManagement.UnitTests.Books.Commands
                 ISBN = command.ISBN
             };
             _mockMapper.Setup(m => m.Map<Book>(command)).Returns(book);
-            _mockRepository.Setup(r => r.UpdateAsync(book)).Returns(Task.CompletedTask);
+            _mockRepository.Setup(r => r.UpdateAsync(book)).ReturnsAsync(book);
 
             // Act
             await _handler.Handle(command, cancellationToken);

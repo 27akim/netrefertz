@@ -17,7 +17,8 @@ namespace BooksManagement.UnitTests.Books.Commands
         {
             _mockRepository = new Mock<IBookRepository>();
             _mockLogger = new Mock<ILogger<DeleteBookHandler>>();
-            _handler = new DeleteBookHandler(_mockRepository.Object);
+            _mockLogger = new Mock<ILogger<DeleteBookHandler>>();
+            _handler = new DeleteBookHandler(_mockRepository.Object, _mockLogger.Object);
         }
 
         [Fact]

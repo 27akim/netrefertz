@@ -20,7 +20,7 @@ namespace BooksManagement.UnitTests.Books.Queries
             _mockRepository = new Mock<IBookRepository>();
             _mockLogger = new Mock<ILogger<GetBookByIdQueryHandler>>();
             _mockMapper = new Mock<IMapper>();
-            _handler = new GetBookByIdQueryHandler(_mockMapper.Object, _mockRepository.Object);
+            _handler = new GetBookByIdQueryHandler(_mockMapper.Object, _mockRepository.Object, _mockLogger.Object);
         }
 
         [Fact]

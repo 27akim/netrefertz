@@ -22,9 +22,18 @@ namespace BooksManagement.Application.Books.Commands
 
         public async Task<string> Handle(CreateBookCommand command, CancellationToken cancellationToken)
         {
-            var book = _mapper.Map<Book>(command);
-            var entity = await _repository.AddAsync(book);
-            return entity.Id;
+            logger.LogInformation("{object}: {action}", nameof(CreateBookHandler), nameof(Handle));
+            try
+            {
+                var book = _mapper.Map<Book>(command);
+                var entity = await _repository.AddAsync(book);
+                return entity.Id;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Error: {error} at {object}: {action}: ", ex.Message, nameof(CreateBookHandler), nameof(Handle));
+                throw;
+            }
         }
     }
 }

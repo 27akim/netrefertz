@@ -10,14 +10,14 @@ namespace BooksManagement.Api.GraphQL.Queries
     {
         public async Task<IEnumerable<Book>> GetBooksAsync([Service] IMediator mediator, [Service] ILogger<BookMutations> logger)
         {
-            logger.LogInformation("{action}", nameof(GetBooksAsync));
+            logger.LogInformation("{object}: {action}", nameof(BookMutations), nameof(GetBooksAsync));
             var result = await mediator.Send(new GetAllBooksQuery());
             return result;
         }
 
         public async Task<Book> GetBookByIdAsync([Service] IMediator mediator, [Service] ILogger<BookMutations> logger, string id)
         {
-            logger.LogInformation("{action} : Id={id}", nameof(GetBookByIdAsync), id);
+            logger.LogInformation("{object}: {action} : Id={id}", nameof(BookMutations), nameof(GetBookByIdAsync), id);
             var result = await mediator.Send(new GetBookByIdQuery { Id = id });
             return result;
         }

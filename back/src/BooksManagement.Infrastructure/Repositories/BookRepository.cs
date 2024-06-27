@@ -37,10 +37,11 @@ namespace BooksManagement.Infrastructure.Repositories
             return await _dataContext.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateAsync(Book book)
+        public async Task<Book> UpdateAsync(Book book)
         {
             _dataContext.Entry(book).State = EntityState.Modified;
             await _dataContext.SaveChangesAsync();
+            return book;
         }
     }
 }

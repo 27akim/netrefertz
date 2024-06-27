@@ -1,7 +1,0 @@
-<h2>Books</h2>
-<ul>
-  <li *ngFor="let book of books$ | async">
-    <a [routerLink]="['/rest/books', book.id]">{{ book.title }}</a>
-  </li>
-</ul>
-<a routerLink="/rest/books/new">Add New Book</a>

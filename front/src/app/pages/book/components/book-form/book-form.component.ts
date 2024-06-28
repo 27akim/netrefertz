@@ -36,19 +36,14 @@ export class BookFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookId = this.route.snapshot.paramMap.get('id') ?? undefined;
-    console.log("1__________________________= " +  this.route.snapshot.paramMap.get('id'));
     this.apiType = this.router.url?.includes("rest") ? "rest" : "graphql";
-    console.log("2__________________________= " +  this.apiType);
     if (this.apiType == "rest") {
       this.bookService = this.bookRestService;
-      console.log("3__________________________= ");
     } 
     else {
-      console.log("4__________________________= ");
       this.bookService = this.bookGraphQLService;
     }
     if (this.bookId != undefined) {
-      console.log("5__________________________= " + this.bookId);
       this.getBook(this.bookId);
     }
   }
@@ -63,7 +58,6 @@ export class BookFormComponent implements OnInit {
       this.updateBook();
     } else {
       this.createBook();
-      console.log("__________________________=createBook " );
     }
   }
 

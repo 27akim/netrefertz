@@ -86,7 +86,7 @@ deleteBook(id: null) {
 
 # BookManagement frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
 
 ## Running the Solution
 

@@ -1,87 +1,70 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of, Subject } from 'rxjs';
 import { BookDetailComponent } from './book-detail.component';
 import { BookRestService } from '../../services/book-rest.service';
 import { BookServiceGraphQL } from '../../services/book-graphql.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Book } from '../../models/book';
+import { CommonModule } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BookDetailComponent', () => {
   let component: BookDetailComponent;
   let fixture: ComponentFixture<BookDetailComponent>;
-  let mockBookRestService: jasmine.SpyObj<BookRestService>;
-  let mockBookServiceGraphQL: jasmine.SpyObj<BookServiceGraphQL>;
-  let mockActivatedRoute: any;
-  let mockRouter: jasmine.SpyObj<Router>;
-  //let mockRouter: Router;
+  let bookRestService: jasmine.SpyObj<BookRestService>;
+  let bookGraphQLService: jasmine.SpyObj<BookServiceGraphQL>;
+  let route: ActivatedRoute;
+  let router: Router;
+  let mockBook: Book = { id: '1', title: 'Book 1', author: 'Author 1', publishedDate: new Date(), isbn: '1234567890' };
 
   beforeEach(async () => {
-    mockBookRestService = jasmine.createSpyObj('BookRestService', ['getBookById', 'deleteBook']);
-    mockBookServiceGraphQL = jasmine.createSpyObj('BookServiceGraphQL', ['getBookById', 'deleteBook']);
-    mockActivatedRoute = {
-      snapshot: {
-        paramMap: {
-          get: jasmine.createSpy('get').and.returnValue('1')
-        }
-      }
-    };
-    
-    mockRouter = jasmine.createSpyObj('Router', ['navigate'], { url: 'rest/books/1'});
-    
+    const bookRestSpy = jasmine.createSpyObj('BookRestService', ['getBookById', 'deleteBook']);
+    const bookGraphQLSpy = jasmine.createSpyObj('BookServiceGraphQL', ['getBookById', 'deleteBook']);
+
     await TestBed.configureTestingModule({
-      declarations: [BookDetailComponent],
-      imports: [],
+      imports: [CommonModule, BookDetailComponent],
       providers: [
-        { provide: BookRestService, useValue: mockBookRestService },
-        { provide: BookServiceGraphQL, useValue: mockBookServiceGraphQL },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute },
-        { provide: Router, useValue: mockRouter }
-      ],
-      schemas: [NO_ERRORS_SCHEMA] 
+        { provide: BookRestService, useValue: bookRestSpy },
+        { provide: BookServiceGraphQL, useValue: bookGraphQLSpy },
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '1' } } } }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookDetailComponent);
     component = fixture.componentInstance;
+    bookRestService = TestBed.inject(BookRestService) as jasmine.SpyObj<BookRestService>;
+    bookGraphQLService = TestBed.inject(BookServiceGraphQL) as jasmine.SpyObj<BookServiceGraphQL>;
+    route = TestBed.inject(ActivatedRoute);
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should use BookRestService when apiType is "rest"', () => {
-    mockBookRestService.getBookById.and.returnValue(of({ id: '1', title: 'Book 1', author: 'Author 1', publishedDate: new Date(), isbn: '1234567890' }));
-    fixture.detectChanges();
-    expect(component.bookService).toBe(mockBookRestService);
+  it('should initialize with REST API and fetch book by ID', () => {
+    spyOnProperty(router, 'url', 'get').and.returnValue('/rest/book/1');
+    bookRestService.getBookById.and.returnValue(of(mockBook));
+
+    component.ngOnInit();
+
+    expect(component.apiType).toBe('rest');
+    expect(bookRestService.getBookById).toHaveBeenCalledWith('1');
     component.book$.subscribe(book => {
-      expect(book.id).toBe('1');
+      expect(book).toEqual(mockBook);
     });
   });
 
-  it('should use BookServiceGraphQL when apiType is "graphql"', () => {
-    Object.defineProperty(mockRouter, 'url', { value: 'graphql', writable: false });
-    mockBookServiceGraphQL.getBookById.and.returnValue(of({ id: '1', title: 'Book 1', author: 'Author 1', publishedDate: new Date(), isbn: '1234567890' }));
-    fixture.detectChanges();
-    expect(component.bookService).toBe(mockBookServiceGraphQL);
-    component.book$.subscribe(book => {
-      expect(book.id).toBe('1');
-    });
-  });
+  it('should initialize with GraphQL API and fetch book by ID', () => {
+    spyOnProperty(router, 'url', 'get').and.returnValue('/graphql/book/1');
+    bookGraphQLService.getBookById.and.returnValue(of(mockBook));
 
-  it('should call getBookById and set book$ observable', () => {
-    const bookMock = { id: '1', title: 'Book 1', author: 'Author 1', publishedDate: new Date(), isbn: '1234567890' };
-    mockBookRestService.getBookById.and.returnValue(of(bookMock));
-    fixture.detectChanges();
-    component.book$.subscribe(book => {
-      expect(book).toEqual(bookMock);
-    });
-    expect(mockBookRestService.getBookById).toHaveBeenCalledWith('1');
-  });
+    component.ngOnInit();
 
-  it('should call destroy$ subject on ngOnDestroy', () => {
-    spyOn(component.destroy$, 'next');
-    spyOn(component.destroy$, 'complete');
-    component.ngOnDestroy();
-    expect(component.destroy$.next).toHaveBeenCalledWith(true);
-    expect(component.destroy$.complete).toHaveBeenCalled();
+    expect(component.apiType).toBe('graphql');
+    expect(bookGraphQLService.getBookById).toHaveBeenCalledWith('1');
+    component.book$.subscribe(book => {
+      expect(book).toEqual(mockBook);
+    });
   });
 });

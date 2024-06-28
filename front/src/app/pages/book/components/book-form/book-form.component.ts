@@ -1,15 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { BookRestService } from '../../services/book-rest.service';
 import { IBookService } from '../../services/book-service.interface';
 import { BookServiceGraphQL } from '../../services/book-graphql.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.css']
+  standalone: true,
+  styleUrls: ['./book-form.component.css'],
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class BookFormComponent implements OnInit {
   @Input() bookId?: string | undefined;

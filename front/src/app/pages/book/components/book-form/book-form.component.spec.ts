@@ -31,8 +31,7 @@ describe('BookFormComponent', () => {
     };
     
     await TestBed.configureTestingModule({
-      declarations: [BookFormComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, BookFormComponent],
       providers: [
         FormBuilder,
         { provide: BookRestService, useValue: mockBookRestService },

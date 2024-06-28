@@ -1,15 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Book } from '../../models/book';
 import { BookRestService } from '../../services/book-rest.service';
 import { BookServiceGraphQL } from '../../services/book-graphql.service';
 import { IBookService } from '../../services/book-service.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
-  styleUrls: ['./book-detail.component.css']
+  standalone: true,
+  styleUrls: ['./book-detail.component.css'],
+  imports: [CommonModule,RouterModule]
 })
 export class BookDetailComponent implements OnInit {
   @Input() bookId!: string;

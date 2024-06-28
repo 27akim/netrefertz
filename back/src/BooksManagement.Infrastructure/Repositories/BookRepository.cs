@@ -8,33 +8,35 @@ namespace BooksManagement.Infrastructure.Repositories
     public class BookRepository : IBookRepository
     {
         private readonly BookDataContext _dataContext;
+        private readonly DbSet<Book> _books;
 
         public BookRepository(BookDataContext dataContext)
         {
             _dataContext = dataContext;
+            _books = dataContext.Books;
         }
 
         public async Task<Book> AddAsync(Book entity)
         {
-            await _dataContext.Books.AddAsync(entity);
+            await _books.AddAsync(entity);
             await _dataContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task DeleteAsync(Book book)
         {
-            _dataContext.Books.Remove(book);
+            _books.Remove(book);
             await _dataContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Book>> GetAllAsync()
         {
-            return await _dataContext.Books.AsNoTracking().ToListAsync();
+            return await _books.AsNoTracking().ToListAsync();
         }
 
         public async Task<Book> GetByIdAsync(string id)
         {
-            return await _dataContext.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Book> UpdateAsync(Book book)

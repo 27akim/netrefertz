@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
 using BooksManagement.Abstractions;
-using BooksManagement.Application.Books.Commands;
+using BooksManagement.Application.Books.Commands.Create;
 using BooksManagement.Core.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Queries
+namespace BooksManagement.Application.Books.Queries.GetById
 {
-    public class GetAllBooksQueryHandler(IMapper mapper, IBookRepository repository, ILogger<GetAllBooksQueryHandler> logger) : IRequestHandler<GetAllBooksQuery, IEnumerable<Book>>
+    public class GetBookByIdQueryHandler(IMapper mapper, IBookRepository repository, ILogger<GetBookByIdQueryHandler> logger) : IRequestHandler<GetBookByIdQuery, Book>
     {
         private readonly IBookRepository _repository = repository;
         private readonly IMapper _mapper = mapper;
-        private readonly ILogger<GetAllBooksQueryHandler> _logger = logger;
+        private readonly ILogger<GetBookByIdQueryHandler> _logger = logger;
 
-        public async Task<IEnumerable<Book>> Handle(GetAllBooksQuery query, CancellationToken cancellationToken)
+        public async Task<Book> Handle(GetBookByIdQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetByIdAsync(query.Id);
             }
             catch (Exception ex)
             {

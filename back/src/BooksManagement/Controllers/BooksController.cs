@@ -1,5 +1,8 @@
-﻿using BooksManagement.Application.Books.Commands;
-using BooksManagement.Application.Books.Queries;
+﻿using BooksManagement.Application.Books.Commands.Create;
+using BooksManagement.Application.Books.Commands.Delete;
+using BooksManagement.Application.Books.Commands.Update;
+using BooksManagement.Application.Books.Queries.GetAll;
+using BooksManagement.Application.Books.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

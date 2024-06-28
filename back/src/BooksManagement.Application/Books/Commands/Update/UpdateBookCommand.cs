@@ -4,10 +4,11 @@ using BooksManagement.Core.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Commands
+namespace BooksManagement.Application.Books.Commands.Update
 {
-    public class CreateBookCommand : IRequest<string>
+    public class UpdateBookCommand : IRequest<Book>
     {
+        public required string Id { get; set; }
         public required string Title { get; set; }
         public required string Author { get; set; }
         public DateTime PublishedDate { get; set; }

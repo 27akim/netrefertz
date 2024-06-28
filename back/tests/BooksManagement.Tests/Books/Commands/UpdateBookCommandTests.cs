@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BooksManagement.Abstractions;
-using BooksManagement.Application.Books.Commands;
+using BooksManagement.Application.Books.Commands.Update;
 using BooksManagement.Core.Entities;
 using Microsoft.Extensions.Logging;
 using Moq;

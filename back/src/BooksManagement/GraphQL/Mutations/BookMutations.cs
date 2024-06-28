@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using BooksManagement.Application.Books.Commands;
+using BooksManagement.Application.Books.Commands.Create;
+using BooksManagement.Application.Books.Commands.Delete;
+using BooksManagement.Application.Books.Commands.Update;
 using BooksManagement.Core.Entities;
 using HotChocolate;
 using MediatR;

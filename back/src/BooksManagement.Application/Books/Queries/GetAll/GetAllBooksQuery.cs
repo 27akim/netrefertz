@@ -5,10 +5,9 @@ using BooksManagement.Core.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Queries
+namespace BooksManagement.Application.Books.Queries.GetAll
 {
-    public class GetBookByIdQuery : IRequest<Book>
+    public class GetAllBooksQuery : IRequest<IEnumerable<Book>>
     {
-        public required string Id { get; set; }
     }
 }

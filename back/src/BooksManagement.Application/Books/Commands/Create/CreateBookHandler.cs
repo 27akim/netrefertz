@@ -4,20 +4,22 @@ using BooksManagement.Core.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Commands
+namespace BooksManagement.Application.Books.Commands.Create
 {
-    public class UpdateBookHandler(IMapper mapper, IBookRepository repository, ILogger<UpdateBookHandler> logger) : IRequestHandler<UpdateBookCommand, Book>
+    public class CreateBookHandler(IMapper mapper, IBookRepository repository, ILogger<CreateBookHandler> logger) : IRequestHandler<CreateBookCommand, string>
     {
         private readonly IMapper _mapper = mapper;
         private readonly IBookRepository _repository = repository;
-        private readonly ILogger<UpdateBookHandler> _logger = logger;
+        private readonly ILogger<CreateBookHandler> _logger = logger;
 
-        public async Task<Book> Handle(UpdateBookCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateBookCommand command, CancellationToken cancellationToken)
         {
+            logger.LogInformation("{object}: {action}", nameof(CreateBookHandler), nameof(Handle));
             try
             {
                 var book = _mapper.Map<Book>(command);
-                return await _repository.UpdateAsync(book);
+                var entity = await _repository.AddAsync(book);
+                return entity.Id;
             }
             catch (Exception ex)
             {

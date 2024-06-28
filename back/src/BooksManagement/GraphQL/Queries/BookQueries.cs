@@ -1,5 +1,7 @@
 ﻿using BooksManagement.Api.GraphQL.Mutations;
 using BooksManagement.Application.Books.Queries;
+using BooksManagement.Application.Books.Queries.GetAll;
+using BooksManagement.Application.Books.Queries.GetById;
 using BooksManagement.Core.Entities;
 using HotChocolate;
 using MediatR;

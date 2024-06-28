@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Commands
+namespace BooksManagement.Application.Books.Commands.Delete
 {
     public class DeleteBookCommand : IRequest<bool>
     {

@@ -1,8 +1,9 @@
 ﻿using BooksManagement.Abstractions;
+using BooksManagement.Application.Books.Commands.Create;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BooksManagement.Application.Books.Commands
+namespace BooksManagement.Application.Books.Commands.Delete
 {
     public class DeleteBookHandler(IBookRepository repository, ILogger<DeleteBookHandler> logger) : IRequestHandler<DeleteBookCommand, bool>
     {

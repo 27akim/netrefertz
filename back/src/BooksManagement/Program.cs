@@ -3,6 +3,8 @@ using BooksManagement.Api.Options;
 using BooksManagement.Api.Extensions;
 using BooksManagement.Application;
 using BooksManagement.Infrastructure;
+using BooksManagement.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<BookDataContext>();
+    await dbContext.Database.MigrateAsync();
 }
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseCors(b => b.WithOrigins(corsOptions?.FrontendUrl).AllowAnyMethod().AllowAnyHeader());

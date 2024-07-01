@@ -84,18 +84,43 @@ deleteBook(id: null) {
 3. **Pagination**:  The solution can be enhanced by adding pagination when getting all books.
 
 
+
+
+
 # BookManagement frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
 
 ## Running the Solution
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm install` to install packages and dependencies. 
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+
+
+## Components
+
+The solution contains following components:
+
+1. **book-detail**: Contains book detailed information.
+2. **book-form**: Contains form for editing and updating.
+3. **book-list**: Contains books list.
 
 ### Work with REST
 
-To work with REST navigate to **/rest**
+To work with REST navigate to **/rest** via header menu
 
 ### Work with GraphQL
 
-To work with GraphQL navigate to **/graphql**
+To work with GraphQL navigate to **/graphql** via header menu
+
+
+
+
+# Running application with Docker
+
+Open CMD and go to the root folder with docker-compose.yml file.
+
+Run `docker compose -f "docker-compose.yml" up -d --build` .
+
+
